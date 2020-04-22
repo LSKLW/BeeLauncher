@@ -3,7 +3,6 @@
     #region
     using MahApps.Metro.Controls;
     using System.IO;
-    using System.Net;
     using System.Windows.Input;
     using Newtonsoft.Json.Linq;
     using System.Collections.ObjectModel;
@@ -15,12 +14,13 @@
     using System.Linq;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
- //   using ICSharpCode.SharpZipLib.Zip;
+    //   using ICSharpCode.SharpZipLib.Zip;
     using System.ComponentModel;
     using System.Windows.Controls;
     using System.Windows.Data;
     using LitJson;
     using System.Text;
+
     using Ionic.Zip;
     #endregion
     /// <summary>
@@ -76,8 +76,8 @@
                   
                     Directory.CreateDirectory(dir_name + "/.minecraft/versions/" + select);//创建文件夹
                 }
-                    string jarurl = "http://bmclapi2.bangbang93.com/versions/" + select + "/client";
-                    string jsonurl = "http://bmclapi2.bangbang93.com/versions/" + select +"/json";
+                    string jarurl = "http://download.mcbbs.net/versions/" + select + "/client";
+                    string jsonurl = "http://download.mcbbs.net/versions/" + select +"/json";
                 //   MessageBox.Show(GetHTML(jsonurl));
                     if (Beelogin.DownloadFile(jarurl, dir_name + " /.minecraft/versions/" + select + "/" + select + ".jar") == true)
                     {
@@ -130,7 +130,7 @@
                     if (forge != null && forge is Forge)
                     {
                         string var_name = forge.Ver;//游戏版本号
-                        string var_forge = forge.Id;//forge版本号http://bmclapi2.bangbang93.com/versions/
+                        string var_forge = forge.Id;//forge版本号http://download.mcbbs.net/versions/
                         string fz = forge.Fz;//forge分支
                      
                         if (File.Exists(dir_name + @"\.minecraft\versions\" + var_name + "-" + "forge" + var_name + "-" + var_forge+"\\" + var_name + "-" + "forge" + var_name + "-" + var_forge+ ".json"))
@@ -141,18 +141,18 @@
                         }
                         if (!File.Exists(dir_name + @"\.minecraft\versions\" + var_name + "\\" + var_name + ".json") || !File.Exists(dir_name + @"\.minecraft\versions\" + var_name + "\\" + var_name + ".jar"))
                         {
-                            if (!Directory.Exists(dir_name + "/.minecraft/versions/" + var_name))
+                            if (!Directory.Exists(dir_name + @"\.minecraft\versions\" + var_name))
                             {
-                                Directory.CreateDirectory(dir_name + "/.minecraft/versions/" + var_name);//创建文件夹
+                                Directory.CreateDirectory(dir_name + @"\.minecraft\versions\" + var_name);//创建文件夹
                             }
-                            string jarurl = "http://bmclapi2.bangbang93.com/versions/" + var_name + "/client";
-                            string jsonurl = "http://bmclapi2.bangbang93.com/versions/" + var_name + "/json";
-                            if (Beelogin.DownloadFile(jarurl, dir_name + " /.minecraft/versions/" + var_name + "/" + var_name + ".jar") == true)
+                            string jarurl = "http://download.mcbbs.net/versions/" + var_name + "/client";
+                            string jsonurl = "http://download.mcbbs.net/versions/" + var_name + "/json";
+                            if (Beelogin.DownloadFile(jarurl, dir_name + @"\.minecraft\versions\" + var_name + "\\" + var_name + ".jar") == true)
                             {
-                                if (Beelogin.DownloadFile(jsonurl, dir_name + "/.minecraft/versions/" + var_name + "/" + var_name + ".json") == false)
+                                if (Beelogin.DownloadFile(jsonurl, dir_name + @"\.minecraft\versions\" + var_name + "\\" + var_name + ".json") == false)
                                 {
                                     Ts("下载失败", var_name + "版本的客户端下载失败,不能继续下载FORGE\r\n出错URL:" + jsonurl);
-                                    Directory.Delete(dir_name + "/.minecraft/versions/" + var_name, true);
+                                    Directory.Delete(dir_name + @"\.minecraft\versions\" + var_name, true);
                                     e.Cancel = true;
                                     return;
                                 }
@@ -160,56 +160,58 @@
                             else
                             {
                                 Ts("下载失败", var_name + "版本的客户端下载失败,不能继续下载FORGE\r\n出错URL:" + jarurl);
-                                Directory.Delete(dir_name + "/.minecraft/versions/" + var_name, true);
+                                Directory.Delete(dir_name + @"\.minecraft\versions\" + var_name, true);
                                 e.Cancel = true;
                                 return;
                             }
                         }
 
-                                              // string forge_link = "http://bmclapi2.bangbang93.com/forge/download?mcversion=" + var_name + "&version=" + var_forge + "&branch=" + var_name + "&category=universal&format=jar";
-                        string forge_link = $"http://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{var_name}-{var_forge}" + (fz != "" ? $"-{fz}" : "") + $"/forge-{var_name}-{var_forge}" + (fz != "" ? $"-{fz}" : "") + $"-universal.jar" ;
-                        string forgedir = dir_name + "/.minecraft/libraries/net/minecraftforge/forge/" + var_name + "-" + var_forge + (fz != "" ? $"-{fz}" : "") + "/" + "forge-" + var_name + "-" + var_forge + (fz != "" ? $"-{fz}" : "") + ".jar";
-                        if (!Directory.Exists(dir_name + "/.minecraft/libraries/net/minecraftforge"))
+                                              // string forge_link = "http://download.mcbbs.net/forge/download?mcversion=" + var_name + "&version=" + var_forge + "&branch=" + var_name + "&category=universal&format=jar";
+                        string forge_link = $"http://download.mcbbs.net/maven/net/minecraftforge/forge/{var_name}-{var_forge}" + (fz != "" ? $"-{fz}" : "") + $"/forge-{var_name}-{var_forge}" + (fz != "" ? $"-{fz}" : "") + $"-universal.jar" ;
+                        string forgedir = dir_name + @".minecraft\libraries\net\minecraftforge\forge\" + var_name + "-" + var_forge + (fz != "" ? $"-{fz}" : "") + "\\" + "forge-" + var_name + "-" + var_forge + (fz != "" ? $"-{fz}" : "") + ".jar";
+                        if (!Directory.Exists(dir_name + @".minecraft\libraries\net\minecraftforge\forge\" + var_name + "-" + var_forge + (fz != "" ? $"-{fz}" : "")))
                         {
-                            Directory.CreateDirectory(dir_name + "/.minecraft/libraries/net/minecraftforge");
+                            Directory.CreateDirectory(dir_name + @".minecraft\libraries\net\minecraftforge\forge\" + var_name + "-" + var_forge + (fz != "" ? $"-{fz}" : ""));
                         }
-                        if (!Directory.Exists(dir_name + "/.minecraft/libraries/net/minecraftforge/forge"))
+                        if (!Directory.Exists(dir_name + @".minecraft\versions\" + var_name + "-" + "forge" + var_name + "-" + var_forge))
                         {
-                            Directory.CreateDirectory(dir_name + "/.minecraft/libraries/net/minecraftforge/forge");
+                            Directory.CreateDirectory(dir_name + @".minecraft\versions\" + var_name + "-" + "forge" + var_name + "-" + var_forge);
                         }
-                        if (!Directory.Exists(dir_name + "/.minecraft/libraries/net/minecraftforge/forge/" + var_name + "-" + var_forge + (fz != "" ? $"-{fz}" : "")))
+                        if (!Directory.Exists(dir_name + @".minecraft\beelanuch_downtemp"))
                         {
-                            Directory.CreateDirectory(dir_name + "/.minecraft/libraries/net/minecraftforge/forge/" + var_name + "-" + var_forge + (fz != "" ? $"-{fz}" : ""));
-                        }
-                        if (!Directory.Exists(dir_name + "/.minecraft/versions/" + var_name + "-" + "forge" + var_name + "-" + var_forge))
-                        {
-                            Directory.CreateDirectory(dir_name + "/.minecraft/versions/" + var_name + "-" + "forge" + var_name + "-" + var_forge);
-                        }
-                        if (!Directory.Exists(dir_name + "/.minecraft/beelanuch_downtemp"))
-                        {
-                            Directory.CreateDirectory(dir_name + "/.minecraft/beelanuch_downtemp");
+                            Directory.CreateDirectory(dir_name + @".minecraft\beelanuch_downtemp");
                         }
                         Console.WriteLine(forge_link);
-                       // MessageBox.Show(forge_link);
+                    
                         if (Beelogin.DownloadFile(forge_link, forgedir))
                         {
-
-                            //    KMCCC.Tools.ZipTools.UnzipFile(dir_name + "/.minecraft/libraries/net/minecraftforge/forge/" + var_name + "-" + var_forge + "/" + "forge-" + var_name + "-" + var_forge + ".jar", dir_name + "/.minecraft/beelanuch_downtemp", null);
-                          //  zipfile.ExtractAll(forgedir, dir_name + "/.minecraft/beelanuch_downtemp");
-                            using (ZipFile zip = new ZipFile(forgedir))
-                            {
-                                zip.ExtractAll(dir_name + "/.minecraft/beelanuch_downtemp", ExtractExistingFileAction.OverwriteSilently);
+                            //      MessageBox.Show(forgedir);
+                            //      KMCCC.Tools.ZipTools.UnzipFile(dir_name + @".minecraft\libraries\net\minecraftforge\forge\" + var_name + "-" + var_forge + "\\" + "forge-" + var_name + "-" + var_forge + ".jar", dir_name + @".minecraft\beelanuch_downtemp", null);
+                            if (!UnZip(forgedir, dir_name + @".minecraft\beelanuch_downtemp\", null)) {
+                                Ts("解压失败", "解压'" + var_name + "'版本的forge'" + var_forge + "'失败,请重试或下载其他版本");
+                                //   Directory.Delete(dir_name + @".minecraft\versions\" + var_name + "-" + "forge" + var_name + "-" + var_forge, true);
+                                e.Cancel = true;
+                                return;
                             }
-                            File.Move(dir_name + "/.minecraft/beelanuch_downtemp/version.json", dir_name + "/.minecraft/versions/" + var_name + "-" + "forge" + var_name + "-" + var_forge + "/" + var_name + "-" + "forge" + var_name + "-" + var_forge + ".json");
-                            Directory.Delete(dir_name + "/.minecraft/beelanuch_downtemp", true);
+                            
+                            //   using (ZipFile zip = new ZipFile(forgedir))
+                            //    {
+                            // MessageBox.Show("1");
+                            //        zip.ExtractAll(dir_name + @"\.minecraft\beelanuch_downtemp", ExtractExistingFileAction.OverwriteSilently);
+                            //     }
+
+                            File.Move(dir_name + @".minecraft\beelanuch_downtemp\version.json", dir_name + @".minecraft\versions\" + var_name + "-" + "forge" + var_name + "-" + var_forge + @"\" + var_name + "-" + "forge" + var_name + "-" + var_forge + ".json");
+                            //MessageBox.Show("2");
+                            Directory.Delete(dir_name + @".minecraft\beelanuch_downtemp", true);
                             Ts("下载成功!", "'" + var_name + "'版本的forge'" + var_forge + "'已下载完毕");
                             e.Cancel = true;
                             return;
                         }
                         else
                         {
+
                             Ts("下载失败", "下载'" + var_name + "'版本的forge'" + var_forge + "'失败,请重试或下载其他版本\r\n出错URL:"+ forge_link);
-                            Directory.Delete(dir_name + "/.minecraft/versions/" + var_name + "-" + "forge" + var_name + "-" + var_forge, true);
+                         //   Directory.Delete(dir_name + @".minecraft\versions\" + var_name + "-" + "forge" + var_name + "-" + var_forge, true);
                             e.Cancel = true;
                             return;
                         }
@@ -235,6 +237,8 @@
                 btn_下载.Content = "下载";
                 rbtn1.IsEnabled = true;
                 rbtn2.IsEnabled = true;
+                rbtn3.IsEnabled = true;
+                rbtn4.IsEnabled = true;
                 MainWindow.main.Getver();
             }
         }
@@ -246,6 +250,8 @@
                 btn_下载.Content = "正在下载";
                 rbtn1.IsEnabled = false;
                 rbtn2.IsEnabled = false;
+                rbtn3.IsEnabled = false;
+                rbtn4.IsEnabled = false;
                 if (!bgWorker.IsBusy)
                 {
                     bgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Bw_RunWorkerCompleted);
@@ -350,7 +356,7 @@
             listView.Items.Clear();
             try
             {
-                string verjson = Beelogin.GetGeneralContent("http://bmclapi2.bangbang93.com/mc/game/version_manifest.json");
+                string verjson = Beelogin.GetGeneralContent("http://download.mcbbs.net/mc/game/version_manifest.json");
                 JsonData json = JsonMapper.ToObject(verjson);
                 json = json["versions"];
                 khdobj = new ObservableCollection<object>();
@@ -406,6 +412,7 @@
             forgeView.Visibility = Visibility.Hidden;
             LiteloaderView.Visibility = Visibility.Hidden;
             OptifineView.Visibility = Visibility.Hidden;
+            btn_下载.IsEnabled = true;
             if (listView.Items.Count < 5)
             {
                 Getkhd();
@@ -421,32 +428,40 @@
             listView.Visibility = Visibility.Hidden;
             LiteloaderView.Visibility = Visibility.Hidden;
             OptifineView.Visibility = Visibility.Hidden;
+            btn_下载.IsEnabled = true;
             if (forgeView.Items.Count < 5)
             {
                 forgeView.Items.Clear();
-                try
-                {
-                    string verjson = Beelogin.GetGeneralContent("http://bmclapi2.bangbang93.com/forge/promos");
+              try
+             {
+                    string verjson = Beelogin.GetGeneralContent("http://download.mcbbs.net/forge/promos");
                     //MessageBox.Show(verjson);
-                    JArray json = JArray.Parse(verjson.Replace(",null", ""));
+                    JArray json = JArray.Parse(verjson);
                     forgeobj = new ObservableCollection<object>();
+                
                     for (int i = 0; i < json.Count; i++)
                     {
-                        var ver = json[i]["build"]["mcversion"].ToString();
-                        if (ver != "1.5.2" && ver != "1.6.1")
+                        var ver = json[i]["build"].ToString();
+                    System.Diagnostics.Debug.WriteLine(ver);
+                        if (ver != "")
                         {
-                            //   var wj = json[i]["build"]["files"].ToString();
-                            //   var wjm = "";
-                            // if (json[i]["build"]["files"][1]["category"].ToString() == "universal")
-                            //    {
-                            //    wjm = json[i]["build"]["files"][1]["format"].ToString();
-                            //    }
-                            //   else if (json[i]["build"]["files"][2]["category"].ToString() == "universal")
-                            //    {
-                            //        wjm = json[i]["build"]["files"][2]["format"].ToString();
-                            //   }
-                            forgeobj.Add(new Forge { Ver = json[i]["build"]["mcversion"].ToString(), Zt = json[i]["name"].ToString(), Id = json[i]["build"]["version"].ToString(), Time = json[i]["build"]["modified"].ToString(), Fz = json[i]["build"]["branch"].ToString() });
+    
+                        //   var wj = json[i]["build"]["files"].ToString();
+                        //   var wjm = "";
+                        // if (json[i]["build"]["files"][1]["category"].ToString() == "universal")
+                        //    {
+                        //    wjm = json[i]["build"]["files"][1]["format"].ToString();
+                        //    }
+                        //   else if (json[i]["build"]["files"][2]["category"].ToString() == "universal")
+                        //    {
+                        //        wjm = json[i]["build"]["files"][2]["format"].ToString();
+                        //   }
+
+                        //var wjm = json[i]["build"]["files"][0]["category"].ToString();
+                        //MessageBox.Show(wjm);
+                        forgeobj.Add(new Forge { Ver = json[i]["build"]["mcversion"].ToString(), Zt = json[i]["name"].ToString(), Id = json[i]["build"]["version"].ToString(), Time = json[i]["build"]["modified"].ToString(), Fz = json[i]["build"]["branch"].ToString() });
                             //VarList_1.Add(new minecraft() { 游戏版本 = json[i].ToString() });
+                     //     System.Diagnostics.Debug.WriteLine(json[i]["build"]["mcversion"].ToString(), json[i]["name"].ToString(),  json[i]["build"]["version"].ToString(),  json[i]["build"]["modified"].ToString(),  json[i]["build"]["branch"].ToString());
                             //VarList_2.Add(new minecraft_forge() { 游戏版本 = json_var_arr_2[i]["build"]["mcversion"].ToString(), 构建时间 = json_var_arr_2[i]["build"]["modified"].ToString(), 构建版本号 = json_var_arr_2[i]["build"]["version"].ToString(), 版本名 = json_var_arr_2[i]["name"].ToString() });
                         }
                     }
@@ -468,12 +483,13 @@
             listView.Visibility = Visibility.Hidden;
             forgeView.Visibility = Visibility.Hidden;
             OptifineView.Visibility = Visibility.Hidden;
+            btn_下载.IsEnabled = true;
             if (LiteloaderView.Items.Count < 5)
             {
                 LiteloaderView.Items.Clear();
                 try
                 {
-                    string verjson = Beelogin.GetGeneralContent("http://bmclapi2.bangbang93.com/liteloader/list");
+                    string verjson = Beelogin.GetGeneralContent("http://download.mcbbs.net/liteloader/list");
                     //MessageBox.Show(verjson);
                     JArray json = JArray.Parse(verjson);
                     Liteloaderobj = new ObservableCollection<object>();
@@ -521,13 +537,14 @@
             listView.Visibility = Visibility.Hidden;
             forgeView.Visibility = Visibility.Hidden;
             LiteloaderView.Visibility = Visibility.Hidden;
+            btn_下载.IsEnabled = true;
             //this.ShowMessageAsync("功能被删除", "很抱歉,此功能在本版本因资源占用过多被删除,如有需要,请使用E版来自动下载安装Optifine");
             if (OptifineView.Items.Count < 5)
             {
                 OptifineView.Items.Clear();
                 try
                 {
-                    string verjson = Beelogin.GetGeneralContent("http://bmclapi.bangbang93.com/optifine/versionlist");
+                    string verjson = Beelogin.GetGeneralContent("http://download.mcbbs.net/optifine/versionlist");
                     //MessageBox.Show(verjson);
                     JArray json = JArray.Parse(verjson);
                     Optifineobj = new ObservableCollection<object>();
@@ -600,8 +617,8 @@
                             {
                                 Directory.CreateDirectory(dir_name + "/.minecraft/versions/" + var_name);//创建文件夹
                             }
-                            string jarurl = "http://bmclapi2.bangbang93.com/versions/" + var_name + "/client";
-                            string jsonurl = "http://bmclapi2.bangbang93.com/versions/" + var_name + "/json";
+                            string jarurl = "http://download.mcbbs.net/versions/" + var_name + "/client";
+                            string jsonurl = "http://download.mcbbs.net/versions/" + var_name + "/json";
                             if (Beelogin.DownloadFile(jarurl, dir_name + " /.minecraft/versions/" + var_name + "/" + var_name + ".jar") == true)
                             {
                                 if (Beelogin.DownloadFile(jsonurl, dir_name + "/.minecraft/versions/" + var_name + "/" + var_name + ".json") == false)
@@ -622,7 +639,7 @@
                         }
 
                
-                       // string forge_link = $"http://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{var_name}-{var_forge}" + (fz != "" ? $"-{fz}" : "") + $"/forge-{var_name}-{var_forge}" + (fz != "" ? $"-{fz}" : "") + $"-universal.jar";
+                       // string forge_link = $"http://download.mcbbs.net/maven/net/minecraftforge/forge/{var_name}-{var_forge}" + (fz != "" ? $"-{fz}" : "") + $"/forge-{var_name}-{var_forge}" + (fz != "" ? $"-{fz}" : "") + $"-universal.jar";
                      //   string forgedir = dir_name + "/.minecraft/libraries/net/minecraftforge/forge/" + var_name + "-" + var_forge + (fz != "" ? $"-{fz}" : "") + "/" + "forge-" + var_name + "-" + var_forge + (fz != "" ? $"-{fz}" : "") + ".jar";
                         if (!Directory.Exists(dir_name + "/.minecraft/mods"))
                         {
@@ -635,10 +652,10 @@
                         string Lite_link;
                         if (zt == "SNAPSHOT")
                         {
-                             Lite_link = "http://bmclapi2.bangbang93.com/maven/com/mumfrey/liteloader/" + var_name + "-" + zt + "/liteloader-" + var_name + "-" + zt + ".jar";
+                             Lite_link = "http://download.mcbbs.net/maven/com/mumfrey/liteloader/" + var_name + "-" + zt + "/liteloader-" + var_name + "-" + zt + ".jar";
                         }
                         else {
-                             Lite_link = "http://bmclapi2.bangbang93.com/maven/com/mumfrey/liteloader/" + var_name + "/liteloader-" + var_lite + ".jar";
+                             Lite_link = "http://download.mcbbs.net/maven/com/mumfrey/liteloader/" + var_name + "/liteloader-" + var_lite + ".jar";
                         }
 
                      //   Console.WriteLine(forge_link);
@@ -708,8 +725,8 @@
                             {
                                 Directory.CreateDirectory(dir_name + "/.minecraft/versions/" + var_name);//创建文件夹
                             }
-                            string jarurl = "http://bmclapi2.bangbang93.com/versions/" + var_name + "/client";
-                            string jsonurl = "http://bmclapi2.bangbang93.com/versions/" + var_name + "/json";
+                            string jarurl = "http://download.mcbbs.net/versions/" + var_name + "/client";
+                            string jsonurl = "http://download.mcbbs.net/versions/" + var_name + "/json";
                             if (Beelogin.DownloadFile(jarurl, dir_name + " /.minecraft/versions/" + var_name + "/" + var_name + ".jar") == true)
                             {
                                 if (Beelogin.DownloadFile(jsonurl, dir_name + "/.minecraft/versions/" + var_name + "/" + var_name + ".json") == false)
@@ -730,7 +747,7 @@
                         }
 
 
-                        // string forge_link = $"http://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{var_name}-{var_forge}" + (fz != "" ? $"-{fz}" : "") + $"/forge-{var_name}-{var_forge}" + (fz != "" ? $"-{fz}" : "") + $"-universal.jar";
+                        // string forge_link = $"http://download.mcbbs.net/maven/net/minecraftforge/forge/{var_name}-{var_forge}" + (fz != "" ? $"-{fz}" : "") + $"/forge-{var_name}-{var_forge}" + (fz != "" ? $"-{fz}" : "") + $"-universal.jar";
                         //   string forgedir = dir_name + "/.minecraft/libraries/net/minecraftforge/forge/" + var_name + "-" + var_forge + (fz != "" ? $"-{fz}" : "") + "/" + "forge-" + var_name + "-" + var_forge + (fz != "" ? $"-{fz}" : "") + ".jar";
                         if (!Directory.Exists(dir_name + "/.minecraft/mods"))
                         {
@@ -740,7 +757,7 @@
                         {
                             Directory.CreateDirectory(dir_name + "/.minecraft/beelanuch_downtemp");
                         }
-                        string Opti_link = "http://bmclapi2.bangbang93.com/optifine/" + var_name + "/" +  zt + "/" + patch;
+                        string Opti_link = "http://download.mcbbs.net/optifine/" + var_name + "/" +  zt + "/" + patch;
                         //   Console.WriteLine(forge_link);
                         //  MessageBox.Show(forge_link);
                         if (Beelogin.DownloadFile(Opti_link, dir_name + "/.minecraft/beelanuch_downtemp/optifine.jar"))
@@ -774,7 +791,102 @@
                 }
             }
         }
+        #region 解压  
 
+        /// <summary>   
+        /// 解压功能(解压压缩文件到指定目录)   
+        /// </summary>   
+        /// <param name="fileToUnZip">待解压的文件</param>   
+        /// <param name="zipedFolder">指定解压目标目录</param>   
+        /// <param name="password">密码</param>   
+        /// <returns>解压结果</returns>   
+        public bool UnZip(string fileToUnZip, string zipedFolder, string password)
+        {
+            bool result = true;
+            FileStream fs = null;
+            ZipInputStream zipStream = null;
+            ZipEntry ent = null;
+            string fileName;
 
+            if (!File.Exists(fileToUnZip))
+                return false;
+
+            if (!Directory.Exists(zipedFolder))
+                Directory.CreateDirectory(zipedFolder);
+           
+            try
+            {
+                zipStream = new ZipInputStream(File.OpenRead(fileToUnZip));
+                if (!string.IsNullOrEmpty(password)) zipStream.Password = password;
+                while ((ent = zipStream.GetNextEntry()) != null)
+                {
+                    if (ent.FileName.Contains("version.json") && !string.IsNullOrEmpty(ent.FileName) && !ent.FileName.Contains("META-INF"))
+                    {
+                       
+                        fileName = Path.Combine(zipedFolder, ent.FileName);
+                        fileName = fileName.Replace('/', '\\');//change by Mr.HopeGi   
+                       
+                        if (fileName.EndsWith("\\"))
+                        {
+                            Directory.CreateDirectory(fileName);
+                            continue;
+                        }
+                        
+                        fs = File.Create(fileName);
+                        int size = 2048;
+                        byte[] data = new byte[size];
+                     
+                        while (true)
+                        {
+                            size = zipStream.Read(data, 0, data.Length);
+                            if (size > 0)
+                                fs.Write(data, 0, size);
+                            else
+                                break;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                result = false;
+            }
+            finally
+            {
+                if (fs != null)
+                {
+                    fs.Close();
+                    fs.Dispose();
+                }
+                if (zipStream != null)
+                {
+                    zipStream.Close();
+                    zipStream.Dispose();
+                }
+                if (ent != null)
+                {
+                    ent = null;
+                }
+                GC.Collect();
+                GC.Collect(1);
+            }
+            return result;
+        }
+
+        /// <summary>   
+        /// 解压功能(解压压缩文件到指定目录)   
+        /// </summary>   
+        /// <param name="fileToUnZip">待解压的文件</param>   
+        /// <param name="zipedFolder">指定解压目标目录</param>   
+        /// <returns>解压结果</returns>   
+        public bool UnZip(string fileToUnZip, string zipedFolder)
+        {
+            bool result = UnZip(fileToUnZip, zipedFolder, null);
+            return result;
+        }
+
+        #endregion
     }
+
 }
+

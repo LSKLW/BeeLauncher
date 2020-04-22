@@ -115,7 +115,7 @@
                         {
                             Directory.CreateDirectory(dir);//创建文件夹
                         }
-                        string URL = "http://bmclapi2.bangbang93.com" + Beelogin.GetRight(downFile[i], "\\libraries").Replace("\\", "/").ToString();
+                        string URL = "http://download.mcbbs.net" + Beelogin.GetRight(downFile[i], "\\libraries").Replace("\\", "/").ToString();
                         //MessageBox.Show(URL);
      
                             if (Beelogin.DownloadFile(URL, filename))
@@ -157,8 +157,8 @@
                     Directory.CreateDirectory(dir);//创建文件夹
                     
                 }
-                    string URL = "http://bmclapi2.bangbang93.com/"+ (newass == true ? "assets" : "resources")   + "/" + (newass == true ? $"{downFile[i].Substring(0, 2)}/" : "") + downFile[i].Replace("\\", "/");
-                   // MessageBox.Show(dir+URL);
+                    string URL = "http://download.mcbbs.net/"+ (newass == true ? "assets" : "resources")   + "/" + (newass == true ? $"{downFile[i].Substring(0, 2)}/" : "") + downFile[i].Replace("\\", "/");
+              
                     try
                     {
                         if (Beelogin.DownloadFile(URL, filename) == true)

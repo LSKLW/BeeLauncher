@@ -287,6 +287,18 @@
                 core = LauncherCore.Create();
                 var version = ver;//设置读取的版本配置为当前选择的项
 
+
+                var jarid = ver.JarId;
+               
+          //      MessageBox.Show(core.GetVersionJsonPath(jarid));
+                if (!File.Exists(core.GetVersionJsonPath(jarid)))
+                {
+                    Ts("无法启动游戏", "游戏核心不存在,请确认已选择正确的核心版本!");
+                    runts.Visibility = Visibility.Hidden;
+                    Btn_启动.Content = "启动游戏";
+                    load.Visibility = Visibility.Hidden;
+                    return;
+                }
                 try
                 {
                     var libs = version.Libraries.Select(lib => core.GetLibPath(lib));
@@ -335,7 +347,7 @@
                 {
                     Directory.CreateDirectory(rundir + ".minecraft/assets/objects");//创建文件夹
                 }
-                var jarid = ver.JarId;
+               
                 var jsondir = core.GetVersionJsonPath(jarid);
                 string json = File.ReadAllText(jsondir);
                 // MessageBox.Show(core.VersionLocator);
@@ -345,7 +357,7 @@
                 try
                 {
                     type = data["assetIndex"]["id"].ToString();
-                    url = data["assetIndex"]["url"].ToString().Replace("https://launchermeta.mojang.com", "http://bmclapi2.bangbang93.com");
+                    url = data["assetIndex"]["url"].ToString().Replace("https://launchermeta.mojang.com", "http://download.mcbbs.net");
                     if (type != "legacy")
                     {
 
@@ -645,12 +657,21 @@
                 return;
             }
             Config.UserName = textBox_name.Text;
-            if (passbox_zhengban.Password == "" && CheckBox_zhengban.IsChecked == true)
+            if(CheckBox_zhengban.IsChecked == true)
             {
-                this.ShowMessageAsync("请填写密码", "正版密码不能为空,请填写完整,如无须正版登录,请取消勾选", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "确定" });
-                return;
+                if (passbox_zhengban.Password == "")
+                {
+                    this.ShowMessageAsync("请填写密码", "正版密码不能为空,请填写完整,如无须正版登录,请取消勾选", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "确定" });
+                    return;
+                }
+                Config.Authenticator = true;
+                Config.Password = passbox_zhengban.Password;
             }
-            Config.Password = passbox_zhengban.Password;
+            else 
+            {
+                Config.Authenticator = false;
+                Config.Password = null;
+            }
             if (!int.TryParse(textBox_neicun.Text, out int maxMem))
             {
                 this.ShowMessageAsync("请填写最大内存", "最大内存不能为空,请填写完整或勾选自动", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "确定" });
@@ -665,15 +686,28 @@
                 this.ShowMessageAsync("JAVA路径错误", "自动读取的Java不存在,请手动指定", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "确定" });
                 return;
             }
-            if (CheckBox_beelogin.IsChecked == true && Config.beeurl ==null) {
-                this.ShowMessageAsync("无法使用BeeLogin", "未设置URL,请在配置文件内设置", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "确定" });
-                return;
-            }else  if (CheckBox_beelogin.IsChecked == true && passbox_beelogin.Password == "" )
+            if (CheckBox_beelogin.IsChecked == true)
             {
-                this.ShowMessageAsync("请填写密码", "登录密码不能为空,请填写完整,如无须蜜蜂登录,请取消勾选", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "确定" });
-                return;
+                if (Config.beeurl == null)
+                {
+                    this.ShowMessageAsync("无法使用BeeLogin", "未设置URL,请在配置文件内设置", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "确定" });
+                    return;
+                }
+                else if (passbox_beelogin.Password == null)
+                {
+                    this.ShowMessageAsync("请填写密码", "登录密码不能为空,请填写完整,如无须蜜蜂登录,请取消勾选", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "确定" });
+                    return;
+                }
+                Config.Beelogin = true;
+                Config.Beepsw = passbox_beelogin.Password;
             }
-            Config.Beepsw =  passbox_beelogin.Password;
+            else 
+            {
+                Config.Beelogin = false;
+                Config.Beepsw = null;
+            }
+
+            
             if (CheckBox_neicun.IsChecked == true)
             {
                 Config.AutoMemory = true;
@@ -701,13 +735,12 @@
             if (CheckBox_zhengban.IsChecked == true)
             {
                 passbox_zhengban.IsEnabled = true;
-                Config.Authenticator = true;
 
             }
             else
             {
                 passbox_zhengban.IsEnabled = false;
-                Config.Authenticator = false;
+                passbox_zhengban.Clear();
             }
         }
 
@@ -733,14 +766,12 @@
                     CheckBox_mod.Visibility = Visibility.Visible;
                     passbox_beelogin.IsEnabled = true;
                     Btn_zhuce.Visibility = Visibility.Visible;
-                    Config.Beelogin = true;
                 }
             } else {
                 textblpsw.Visibility = Visibility.Hidden;
                 passbox_beelogin.Visibility = Visibility.Hidden;
                 CheckBox_mod.Visibility = Visibility.Hidden;
                 Btn_zhuce.Visibility = Visibility.Hidden;
-                Config.Beelogin = false;
             }
         }
 
@@ -749,13 +780,13 @@
             if (CheckBox_neicun.IsChecked == true)
             {
                 textBox_neicun.IsEnabled = false;
-                Config.AutoMemory = true;
+
                 Autonc();
             }
             else
             {
                 textBox_neicun.IsEnabled = true;
-                Config.AutoMemory = false;
+
             }
         }
 

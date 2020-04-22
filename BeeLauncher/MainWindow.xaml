@@ -20,11 +20,11 @@
 
         <Button
                     x:Name="Btn_启动" 
-                    Margin="405,296,159,67"
+                    Margin="405,297,159,67"
                     Content="启动游戏"
-                    Style="{DynamicResource AccentedSquareButtonStyle}" Width="156" Height="87" FontFamily="Microsoft YaHei" FontSize="24" Click="Btn_启动_Click" />
+                    Style="{DynamicResource AccentedSquareButtonStyle}" Width="156" Height="86" FontFamily="Microsoft YaHei" FontSize="24" Click="Btn_启动_Click" />
         <Button x:Name="Btn_下载" Content="下载游戏" HorizontalAlignment="Left"  Style="{DynamicResource AccentedSquareButtonStyle}" Background="{DynamicResource AccentColorBrush3}" Margin="572,297,0,0" VerticalAlignment="Top" Width="94" FontSize="14" Height="40" FontFamily="Microsoft YaHei" FontWeight="Normal" Click="Btn_下载_Click" />
-        <Button x:Name="Btn_设置" Content="设置" HorizontalAlignment="Left"  Style="{DynamicResource AccentedSquareButtonStyle}" Background="{DynamicResource AccentColorBrush3}" Margin="572,343,0,0" VerticalAlignment="Top" Width="94" Height="40" FontFamily="Microsoft YaHei" FontWeight="Normal" Click="Button2_Click" FontSize="16"/>
+        <Button x:Name="Btn_设置" Content="设置" HorizontalAlignment="Left"  Style="{DynamicResource AccentedSquareButtonStyle}" Background="{DynamicResource AccentColorBrush3}" Margin="572,343,0,67" Width="94" FontFamily="Microsoft YaHei" FontWeight="Normal" Click="Button2_Click" FontSize="16"/>
         <Canvas x:Name="设置框" Height="215" Margin="31,79,30,0" VerticalAlignment="Top" Opacity="0.75"  Background="{DynamicResource GrayBrush10}" Visibility="Hidden">
             <GroupBox x:Name="游戏设置box" Header="游戏设置" HorizontalAlignment="Left" VerticalAlignment="Top" Height="159" Width="418" Margin="0">
                 <Canvas x:Name="游戏设置框" HorizontalAlignment="Left" Height="149" Margin="-5,-32,-2,-5" VerticalAlignment="Top" Width="413" Opacity="0.75">
@@ -200,7 +200,7 @@
             </ComboBox.Background>
         </ComboBox>
         <Button x:Name="button4" Content="打开目录"  Style="{DynamicResource AccentedSquareButtonStyle}" HorizontalAlignment="Left" Margin="572,391,0,0" VerticalAlignment="Top" Width="94" Height="28" FontFamily="Microsoft YaHei" FontWeight="Normal" FontSize="14" Background="#B2F3F3F3" Click="Button4_Click"/>
-        <Label x:Name="label" Content="BeeLauncher C1.0.8 BY:LSK" HorizontalAlignment="Left" Margin="-4,430,0,-5" VerticalAlignment="Top" Foreground="#FFFDFDFD">
+        <Label x:Name="label" Content="BeeLauncher C1.0.9 BY:LSK" HorizontalAlignment="Left" Margin="-4,430,0,-5" VerticalAlignment="Top" Foreground="#FFFDFDFD">
             <Label.Effect>
                 <DropShadowEffect ShadowDepth="0"  
                           Color="White"  

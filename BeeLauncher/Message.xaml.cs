@@ -25,7 +25,7 @@
                 TextMainTs.Text = "检查资源文件失败,游戏可能没有声音!";
             }
             else {
-                TextMainTs.Text = "";
+                TextMainTs.Text = null;
             }
             dTimer.Tick += new EventHandler(DTimer_Tick);
             dTimer.Interval = new TimeSpan(0, 0, 5);
