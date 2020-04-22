@@ -155,7 +155,7 @@
             <TextBlock x:Name="textlb_Copy1" TextWrapping="Wrap" Text="感谢" Canvas.Top="133" RenderTransformOrigin="0.595,0.967" Canvas.Left="442">
 
             </TextBlock>
-            <CheckBox x:Name="CheckBox_mod" Content="蜜蜂MOD" Height="29" VerticalAlignment="Top" Canvas.Top="173" Width="100" Canvas.Left="2" Click="CheckBox_mod_Click" Visibility="Hidden" >
+            <CheckBox x:Name="CheckBox_mod" Content="蜜蜂MOD" Height="29" VerticalAlignment="Top" Canvas.Top="173" Width="100" Canvas.Left="2" Visibility="Hidden" >
                 <CheckBox.Effect>
                     <DropShadowEffect ShadowDepth="0"  
                         Color="Black"  

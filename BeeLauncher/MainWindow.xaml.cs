@@ -265,7 +265,7 @@
             {
                 await this.ShowMessageAsync("无法启动游戏", "没有读取到游戏版本", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "确定" });
                 Btn_启动.IsEnabled = true;
-                runts.Text = "";
+                runts.Text = null;
                 load.Visibility = Visibility.Hidden;
                 return;
             }
@@ -484,8 +484,8 @@
 
                         if (url == "null")
                         {
-                            await this.ShowMessageAsync("资源文件缺失", "发现缺少了" + (lostasset.Count != 0 ? lostasset.Count.ToString() : lostlegacyasset.Count != 0 ? lostlegacyasset.Count.ToString() : "") + "个资源文件,这可能导致游戏声音丢失\n但您的游戏核心版本较旧,不能自动补全.\n建议前往下载游戏窗口下载新版本客户端!", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "确定" });
-                         //   Ts("资源文件缺失", "发现缺少了" + (lostasset.Count != 0 ? lostasset.Count.ToString() : lostlegacyasset.Count != 0 ? lostlegacyasset.Count.ToString() : "") + "个资源文件,但您的游戏核心版本较旧,不能自动补全.\n建议前往下载游戏窗口下载新版本客户端!");
+                            await this.ShowMessageAsync("资源文件缺失", "发现缺少了" + (lostasset.Count != 0 ? lostasset.Count.ToString() : lostlegacyasset.Count != 0 ? lostlegacyasset.Count.ToString() : null) + "个资源文件,这可能导致游戏声音丢失\n但您的游戏核心版本较旧,不能自动补全.\n建议前往下载游戏窗口下载新版本客户端!", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "确定" });
+                         //   Ts("资源文件缺失", "发现缺少了" + (lostasset.Count != 0 ? lostasset.Count.ToString() : lostlegacyasset.Count != 0 ? lostlegacyasset.Count.ToString() : null) + "个资源文件,但您的游戏核心版本较旧,不能自动补全.\n建议前往下载游戏窗口下载新版本客户端!");
                     }
                         else {
                             // new downWindow { Owner = this }.ShowDialog();
@@ -650,7 +650,17 @@
 
         private void Btn_save_Click(object sender, RoutedEventArgs e)
         {
-            if (textBox_name.Text == "")
+
+            if (CheckBox_beijing.IsChecked == true)
+            {
+                Config.bg = true;
+            }
+            else 
+            {
+                Config.bg = false;
+            }
+
+            if (textBox_name.Text == null)
             {
                 this.ShowMessageAsync("请填写游戏名", "游戏名不能为空,请填写完整.", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "确定" });
                 TextBoxHelper.SetIsWaitingForData(textBox_name, true);
@@ -659,7 +669,7 @@
             Config.UserName = textBox_name.Text;
             if(CheckBox_zhengban.IsChecked == true)
             {
-                if (passbox_zhengban.Password == "")
+                if (passbox_zhengban.Password == null)
                 {
                     this.ShowMessageAsync("请填写密码", "正版密码不能为空,请填写完整,如无须正版登录,请取消勾选", MessageDialogStyle.Affirmative, new MetroDialogSettings() { AffirmativeButtonText = "确定" });
                     return;
@@ -700,13 +710,36 @@
                 }
                 Config.Beelogin = true;
                 Config.Beepsw = passbox_beelogin.Password;
+                if (CheckBox_mod.IsChecked == true)
+                {
+                    Config.Beemod = true;
+                }
+                else
+                {
+                    Config.Beemod = false;
+                }
             }
             else 
             {
                 Config.Beelogin = false;
+                Config.Beemod = false;
                 Config.Beepsw = null;
             }
-
+                        if (CheckBox_mod.IsChecked == true)
+            {
+                Config.Beemod = true;
+            }
+            else
+            {
+                Config.Beemod = false;
+            }            if (CheckBox_mod.IsChecked == true)
+            {
+                Config.Beemod = true;
+            }
+            else
+            {
+                Config.Beemod = false;
+            }
             
             if (CheckBox_neicun.IsChecked == true)
             {
@@ -746,7 +779,7 @@
 
         private void TextBox_name_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (textBox_name.Text != "")
+            if (!string.IsNullOrWhiteSpace(textBox_name.Text))
             {
                 TextBoxHelper.SetIsWaitingForData(textBox_name, false);
             }
@@ -810,9 +843,9 @@
 
         private void Btn_delpass_Click(object sender, RoutedEventArgs e)
         {
-            passbox_zhengban.Password = "";
-            Config.Password = "";
-            Config.Beepsw = "";
+            passbox_zhengban.Password = null;
+            Config.Password = null;
+            Config.Beepsw = null;
             passbox_zhengban.IsEnabled = false;
             CheckBox_zhengban.IsChecked = false;
             Config.Authenticator = false;
@@ -833,7 +866,7 @@
         {
             try {
 
-            if (ListVersions.Text != "")
+            if (ListVersions.Text != null)
             {
                     //    ver = (Version)ListVersions.SelectedItem;
                     //   core = LauncherCore.Create();
@@ -865,16 +898,10 @@
                 string dir = rundir + "启动器背景";
                 if (!Directory.Exists(dir))
                 {
-
                     Directory.CreateDirectory(dir);
                     File.Create(dir + "\\请把背景图放在此目录");
                     Process.Start("explorer.exe", dir);
                 }
-                Config.bg = true;
-            }
-            else
-            {
-                Config.bg = false;
             }
         }
 
@@ -965,19 +992,6 @@
                 }
             }
         }
-
-        private void CheckBox_mod_Click(object sender, RoutedEventArgs e)
-        {
-            if (CheckBox_mod.IsChecked == true)
-            {
-                Config.Beemod = true;
-            }
-            else
-            {
-                Config.Beemod = false;
-            }
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (accentThemeTestWindow != null)
