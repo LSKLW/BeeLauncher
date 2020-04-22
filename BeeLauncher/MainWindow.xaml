@@ -1,0 +1,221 @@
+﻿<Controls:MetroWindow x:Class="BeeLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+        Title="BeeLauncher" Height="450" Width="720" ResizeMode="NoResize" WindowStyle="None" ShowTitleBar="False" GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen" FontFamily="Microsoft YaHei" Closing="MetroWindow_Closing">
+
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="主题" Click="Button_Click" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    <Grid x:Name="grid" MouseLeftButtonDown="Grid_MouseLeftButtonDown" HorizontalAlignment="Left" Width="720" Loaded="Bg">
+        <Grid.Background>
+            <ImageBrush ImageSource="bg.jpg"/>
+        </Grid.Background>
+
+
+        <Button
+                    x:Name="Btn_启动" 
+                    Margin="405,296,159,67"
+                    Content="启动游戏"
+                    Style="{DynamicResource AccentedSquareButtonStyle}" Width="156" Height="87" FontFamily="Microsoft YaHei" FontSize="24" Click="Btn_启动_Click" />
+        <Button x:Name="Btn_下载" Content="下载游戏" HorizontalAlignment="Left"  Style="{DynamicResource AccentedSquareButtonStyle}" Background="{DynamicResource AccentColorBrush3}" Margin="572,297,0,0" VerticalAlignment="Top" Width="94" FontSize="14" Height="40" FontFamily="Microsoft YaHei" FontWeight="Normal" Click="Btn_下载_Click" />
+        <Button x:Name="Btn_设置" Content="设置" HorizontalAlignment="Left"  Style="{DynamicResource AccentedSquareButtonStyle}" Background="{DynamicResource AccentColorBrush3}" Margin="572,343,0,0" VerticalAlignment="Top" Width="94" Height="40" FontFamily="Microsoft YaHei" FontWeight="Normal" Click="Button2_Click" FontSize="16"/>
+        <Canvas x:Name="设置框" Height="215" Margin="31,79,30,0" VerticalAlignment="Top" Opacity="0.75"  Background="{DynamicResource GrayBrush10}" Visibility="Hidden">
+            <GroupBox x:Name="游戏设置box" Header="游戏设置" HorizontalAlignment="Left" VerticalAlignment="Top" Height="159" Width="418" Margin="0">
+                <Canvas x:Name="游戏设置框" HorizontalAlignment="Left" Height="149" Margin="-5,-32,-2,-5" VerticalAlignment="Top" Width="413" Opacity="0.75">
+                    <TextBlock x:Name="textyxmz" TextWrapping="Wrap" Text="游戏名字" Canvas.Top="38" Canvas.Left="3" >
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock x:Name="textpsw" TextWrapping="Wrap" Text="正版密码" Canvas.Top="40" Canvas.Left="156" >
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock x:Name="textjava" TextWrapping="Wrap" Text="Java路径" Canvas.Top="71" Canvas.Left="2" >
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBox x:Name="textBox_name" Controls:TextBoxHelper.Watermark="游戏名"  ToolTip="Default alignment" Height="23" Width="95" Canvas.Left="56" Canvas.Top="34" TextChanged="TextBox_name_TextChanged" Controls:TextBoxHelper.IsWaitingForData="True" Text=""/>
+                    <PasswordBox x:Name="passbox_zhengban" Canvas.Left="209" Canvas.Top="34" Width="130" IsEnabled="False" Controls:PasswordBoxHelper.CapsLockWarningToolTip="大写锁定已打开" Controls:TextBoxHelper.IsWaitingForData="True"/>
+                    <CheckBox x:Name="CheckBox_zhengban" Content="正版登录" Canvas.Left="341" Canvas.Top="38" FontFamily="Microsoft YaHei"  IsChecked="False" Click="CheckBox_zhengban_Click" >
+                        <CheckBox.Effect>
+                            <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="2"/>
+                        </CheckBox.Effect>
+                    </CheckBox>
+                    <TextBox x:Name="textBox_java" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="283" Canvas.Left="56" Canvas.Top="65"/>
+                    <Button x:Name="button" Content="浏览" Canvas.Left="344" Canvas.Top="65" Width="66" Click="Button_Click_1"/>
+                    <TextBlock x:Name="textnc" TextWrapping="Wrap" Text="最大内存" Canvas.Top="102" Canvas.Left="2" RenderTransformOrigin="0.595,0.967" >
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <CheckBox x:Name="CheckBox_neicun" Content="自动" Canvas.Left="102" Canvas.Top="100" FontFamily="Microsoft YaHei" IsChecked="True" Click="CheckBox_neicun_Checked" >
+                        <CheckBox.Effect>
+                            <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="2"/>
+                        </CheckBox.Effect>
+                    </CheckBox>
+                    <TextBox x:Name="textBox_neicun" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" Canvas.Left="56" Canvas.Top="96" IsEnabled="False" TextChanged="Numonly" />
+                    <TextBlock x:Name="textblpsw" TextWrapping="Wrap" Text="登录密码" Canvas.Top="102" Canvas.Left="156" RenderTransformOrigin="0.595,0.967" Visibility="Hidden"/>
+                    <PasswordBox x:Name="passbox_beelogin" Canvas.Left="209" Canvas.Top="96" Width="130" IsEnabled="False" Controls:PasswordBoxHelper.CapsLockWarningToolTip="大写锁定已打开" Controls:TextBoxHelper.IsWaitingForData="True" Visibility="Hidden"/>
+                    <CheckBox x:Name="CheckBox_beelogin" Content="蜜蜂登录" Canvas.Left="341" Canvas.Top="100" FontFamily="Microsoft YaHei" Click="CheckBox_beelogin_Click" >
+                        <CheckBox.Effect>
+                            <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="2"/>
+                        </CheckBox.Effect>
+                    </CheckBox>
+                    <TextBlock x:Name="textcs" TextWrapping="Wrap" Text="自动进服" Canvas.Top="132" RenderTransformOrigin="0.595,0.967" Canvas.Left="2" >
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBox x:Name="textBox_canshu" Controls:TextBoxHelper.Watermark="IP"  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" Canvas.Left="56" Canvas.Top="127" />
+                    <CheckBox x:Name="CheckBox_beijing" Content="随机背景" Canvas.Left="267" Canvas.Top="130" FontFamily="Microsoft YaHei" Click="CheckBox_beijing_Checked" >
+                        <CheckBox.Effect>
+                            <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="2"/>
+                        </CheckBox.Effect>
+                    </CheckBox>
+                    <Button x:Name="Btn_zhuce" Content="注册账号" Canvas.Left="344" Canvas.Top="127" Width="66" Click="Btn_zhuce_Click" Visibility="Hidden"/>
+                    <TextBox x:Name="textBox_port" Controls:TextBoxHelper.Watermark="端口"  HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="52" Canvas.Left="209" Canvas.Top="127" />
+
+                </Canvas>
+
+
+            </GroupBox>
+            <GroupBox x:Name="启动方式box" Header="启动方式" HorizontalAlignment="Left" VerticalAlignment="Top" Height="159" Width="240" Canvas.Left="418" Margin="0" BorderBrush="White"/>
+            <Button x:Name="Btn_findjava" Content="自动查找Java" Canvas.Left="107" Canvas.Top="167" Width="92" Height="41" FontSize="12" FontFamily="Microsoft YaHei" Click="Btn_findjava_Click"/>
+            <Button x:Name="Btn_color" Content="更改主题颜色" Canvas.Left="219" Canvas.Top="167" Width="92" Height="41" FontSize="12" FontFamily="Microsoft YaHei" Click="Btn_color_Click"/>
+            <Button x:Name="Btn_delpass" Content="删除密码信息" Canvas.Left="332" Canvas.Top="167" Width="86" Height="41" FontFamily="Microsoft YaHei UI" FontSize="12" Click="Btn_delpass_Click"/>
+            <Button x:Name="Btn_save" Content="保存设置" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130"  Height="45" FontSize="24" FontFamily="Microsoft YaHei" Canvas.Left="521" Canvas.Top="164" FontWeight="Normal" BorderBrush="{x:Null}"  Style="{DynamicResource AccentedSquareButtonStyle}" Click="Btn_save_Click"/>
+            <TextBlock x:Name="textlb_Copy" TextWrapping="Wrap" Text="游戏目录(选择mod,材质包,存档保存的目录)" Canvas.Top="33" RenderTransformOrigin="0.595,0.967" Canvas.Left="422">
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="5"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <RadioButton x:Name="rbtn1" Content=".minecraft" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="423" Canvas.Top="56" IsChecked="True" >
+                <RadioButton.Effect>
+                    <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="5"/>
+                </RadioButton.Effect>
+            </RadioButton>
+            <RadioButton x:Name="rbtn2" Content=".minecraft\versions\版本名称" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="423" Canvas.Top="79">
+                <RadioButton.Effect>
+                    <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="5"/>
+                </RadioButton.Effect>
+            </RadioButton>
+            <TextBlock x:Name="texts" TextWrapping="Wrap" Text="只在1.6以上版本有效" Canvas.Top="106" RenderTransformOrigin="0.595,0.967" Canvas.Left="423">
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="5"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock x:Name="textlb_Copy1" TextWrapping="Wrap" Text="感谢" Canvas.Top="133" RenderTransformOrigin="0.595,0.967" Canvas.Left="442">
+
+            </TextBlock>
+            <CheckBox x:Name="CheckBox_mod" Content="蜜蜂MOD" Height="29" VerticalAlignment="Top" Canvas.Top="173" Width="100" Canvas.Left="2" Click="CheckBox_mod_Click" Visibility="Hidden" >
+                <CheckBox.Effect>
+                    <DropShadowEffect ShadowDepth="0"  
+                        Color="Black"  
+                        Opacity="1"  
+                        BlurRadius="2"/>
+                </CheckBox.Effect>
+            </CheckBox>
+            <Controls:TransitioningContentControl x:Name="SecondcustomTransitioning"
+                                                  Width="187"
+                                                  Height="16"
+                                                  CustomVisualStatesName="SecondCustomTransition"
+                                                  Content="BeeStudio 提供技术支持"
+                                                  Transition="Custom" Canvas.Left="471" Canvas.Top="133">
+                <Controls:TransitioningContentControl.CustomVisualStates>
+                    <VisualState x:Name="SecondCustomTransition">
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                           Storyboard.TargetName="CurrentContentPresentationSite"
+                                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
+                                <SplineDoubleKeyFrame KeyTime="00:00:00.5" Value="0" />
+                                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1">
+                                    <EasingDoubleKeyFrame.EasingFunction>
+                                        <SineEase />
+                                    </EasingDoubleKeyFrame.EasingFunction>
+                                </EasingDoubleKeyFrame>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                           Storyboard.TargetName="PreviousContentPresentationSite"
+                                                           Storyboard.TargetProperty="(UIElement.Opacity)">
+                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1" />
+                                <SplineDoubleKeyFrame KeyTime="00:00:00.5" Value="0" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </Controls:TransitioningContentControl.CustomVisualStates>
+            </Controls:TransitioningContentControl>
+        </Canvas>
+        <ComboBox x:Name="ListVersions" HorizontalAlignment="Left" Margin="405,393,0,0" VerticalAlignment="Top" Width="156" FontFamily="Microsoft YaHei UI" DisplayMemberPath="Id">
+            <ComboBox.Background>
+                <SolidColorBrush Color="#B2F7F7F7"/>
+            </ComboBox.Background>
+        </ComboBox>
+        <Button x:Name="button4" Content="打开目录"  Style="{DynamicResource AccentedSquareButtonStyle}" HorizontalAlignment="Left" Margin="572,391,0,0" VerticalAlignment="Top" Width="94" Height="28" FontFamily="Microsoft YaHei" FontWeight="Normal" FontSize="14" Background="#B2F3F3F3" Click="Button4_Click"/>
+        <Label x:Name="label" Content="BeeLauncher C1.0.8 BY:LSK" HorizontalAlignment="Left" Margin="-4,430,0,-5" VerticalAlignment="Top" Foreground="#FFFDFDFD">
+            <Label.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                          Color="White"  
+                          Opacity="1"  
+                          BlurRadius="5"/>
+            </Label.Effect>
+        </Label>
+
+
+        <Controls:ProgressRing
+                                      x:Name="load"
+                                       Width="40"
+                                       Height="40" Margin="464,321,216,89" Foreground="#CCFFFFFF" Visibility="Hidden" />
+        <TextBlock x:Name="runts" HorizontalAlignment="Left" Margin="409,364,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="148" TextAlignment="Center" Foreground="White" Visibility="Hidden"/>
+
+
+    </Grid>
+</Controls:MetroWindow>

@@ -1,0 +1,56 @@
+﻿<Controls:MetroWindow x:Class="BeeLauncher.Message"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="游戏正在启动" Height="239.759" Width="511.446" ResizeMode="NoResize" WindowStyle="None"  ShowTitleBar="False" >
+    <Grid x:Name="grid" Margin="0,0,-3,0" Loaded="Bg">
+        <Grid.Background>
+            <ImageBrush ImageSource="bg.jpg"/>
+        </Grid.Background>
+        <Controls:ProgressRing
+                                      x:Name="load"
+                                       Width="74"
+                                       Height="65" Margin="37,92,395,75" Foreground="#CC1695FF" />
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="游戏正在启动中" VerticalAlignment="Top" FontSize="24" Foreground="White">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="40"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="147,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Height="23" Width="313" Foreground="White" Text="出现无响应等情况是正常现象,请耐心等待">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="30"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <Button
+            x:Name="btn_确定" 
+            Margin="393,191,10,10"
+            Content="确定"
+            Style="{DynamicResource AccentedSquareButtonStyle}" FontFamily="Microsoft YaHei" FontSize="14" BorderBrush="#FF0357AC" Click="Btn_确定_Click"/>
+        <TextBlock x:Name="TextMainTs" HorizontalAlignment="Left" Margin="147,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Height="23" Width="313" Foreground="White" FontWeight="Bold">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                    Color="Black"  
+                    Opacity="1"  
+                    BlurRadius="30"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="147,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Height="23" Width="313" Foreground="White" Text="五秒后自动关闭">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                    Color="Black"  
+                    Opacity="1"  
+                    BlurRadius="30"/>
+            </TextBlock.Effect>
+        </TextBlock>
+
+    </Grid>
+</Controls:MetroWindow>

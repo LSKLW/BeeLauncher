@@ -1,0 +1,104 @@
+﻿<Controls:MetroWindow x:Class="BeeLauncher.PackWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="BeeLauncher" Height="450" Width="720" ResizeMode="NoResize" WindowStyle="None" ShowTitleBar="False" GlowBrush="#FF8A9680" WindowStartupLocation="CenterOwner" FontFamily="Microsoft YaHei"
+        >
+    <Grid x:Name="grid" MouseLeftButtonDown="Grid_MouseLeftButtonDown" HorizontalAlignment="Left" Width="720" Loaded="Bg">
+        <Grid.Background>
+            <ImageBrush ImageSource="bg.jpg"/>
+        </Grid.Background>
+        <Label x:Name="label" Content="BeeLauncher C1.0.7 BY:LSK" HorizontalAlignment="Left" Margin="-4,430,0,-5" VerticalAlignment="Top" Foreground="#FFFDFDFD"/>
+        <Button
+            x:Name="btn_下载" 
+            Margin="602,404,13,11"
+            Content="下载"
+            Style="{DynamicResource AccentedSquareButtonStyle}" FontFamily="Microsoft YaHei" FontSize="14" BorderBrush="#FF0357AC" Click="Btn_确定_Click"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="364" Margin="10,31,0,0" VerticalAlignment="Top"  ItemsSource="{Binding}"  Width="700" Opacity="0.7">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Ver}" Header="版本" Width="90"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Type}" Header="类型" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Time}" Header="构建时间" Width="200"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="forgeView" HorizontalAlignment="Left" Height="364" Margin="10,31,0,0" VerticalAlignment="Top" Width="700" Opacity="0.7" Visibility="Hidden" ItemsSource="{Binding}"  GridViewColumnHeader.Click="GridViewColumnHeader_Click" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Ver}" Header="客户端版本" Width="80"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Zt}" Header="版本状态" Width="140"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="构建版本号" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Time}" Header="构建时间" Width="200"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Fz}" Header="分支" Width="70"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="LiteloaderView" HorizontalAlignment="Left" Height="364" Margin="10,31,0,0" VerticalAlignment="Top" Width="700" Opacity="0.7" Visibility="Hidden" ItemsSource="{Binding}"  GridViewColumnHeader.Click="GridViewColumnHeader_Click" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Ver}" Header="客户端版本" Width="80"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Zt}" Header="版本类型" Width="140"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="构建版本号" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="OptifineView" HorizontalAlignment="Left" Height="364" Margin="10,31,0,0" VerticalAlignment="Top" Width="700" Opacity="0.7" Visibility="Hidden" ItemsSource="{Binding}"  GridViewColumnHeader.Click="GridViewColumnHeader_Click" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Ver}" Header="客户端版本" Width="80"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Zt}" Header="版本类型" Width="140"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="补丁版本号" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock x:Name="title"  HorizontalAlignment="Left" Margin="5,4,0,0" TextWrapping="Wrap" Text="游戏下载" VerticalAlignment="Top" Foreground="White">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="20"/>
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <RadioButton x:Name="rbtn1" Content="客户端下载" HorizontalAlignment="Left" Margin="10,409,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Microsoft YaHei UI" FontWeight="Bold" IsChecked="True" Checked="Rbtn1_Checked" >
+            <RadioButton.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="5"/>
+            </RadioButton.Effect>
+        </RadioButton>
+        <RadioButton x:Name="rbtn2" Content="FORGE" HorizontalAlignment="Left" Margin="105,409,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Microsoft YaHei UI" FontWeight="Bold" Checked="Rbtn2_Checked" >
+            <RadioButton.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                    Color="Black"  
+                    Opacity="1"  
+                    BlurRadius="5"/>
+            </RadioButton.Effect>
+        </RadioButton>
+        <Controls:ProgressRing
+            x:Name="load"
+            Width="40"
+            Height="35" Margin="554,404,126,11" Foreground="#CC1695FF" Visibility="Hidden"  />
+        <RadioButton x:Name="rbtn3" Content="Liteloader" HorizontalAlignment="Left" Margin="179,409,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Microsoft YaHei UI" FontWeight="Bold" Checked="Rbtn3_Checked"  >
+            <RadioButton.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                    Color="Black"  
+                    Opacity="1"  
+                    BlurRadius="5"/>
+            </RadioButton.Effect>
+        </RadioButton>
+        <RadioButton x:Name="rbtn4" Content="OptiFine" HorizontalAlignment="Left" Margin="270,409,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Microsoft YaHei UI" FontWeight="Bold" Checked="Rbtn4_Checked"  >
+            <RadioButton.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                    Color="Black"  
+                    Opacity="1"  
+                    BlurRadius="5"/>
+            </RadioButton.Effect>
+        </RadioButton>
+    </Grid>
+</Controls:MetroWindow>

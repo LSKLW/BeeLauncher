@@ -1,0 +1,70 @@
+﻿<Controls:MetroWindow x:Class="BeeLauncher.Register"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="BeeLogin" Height="239.759" Width="468.406" ResizeMode="NoResize" WindowStyle="None"  ShowTitleBar="False" WindowStartupLocation="CenterOwner"  Loaded="Start" >
+    <Grid x:Name="grid" Margin="0,0,-3,0" Loaded="Bg">
+        <Grid.Background>
+            <ImageBrush ImageSource="bg.jpg"/>
+        </Grid.Background>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="注册账号" VerticalAlignment="Top" FontSize="24" Foreground="White">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                          Color="Black"  
+                          Opacity="1"  
+                          BlurRadius="40"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <Button
+            x:Name="btn_注册" 
+            Margin="0,201,3,0"
+            Content="注册"
+            Style="{DynamicResource AccentedSquareButtonStyle}" FontFamily="Microsoft YaHei" FontSize="14" BorderBrush="#FF0357AC" Click="Btn_确定_Click"/>
+        <PasswordBox x:Name="passbox_1" Controls:PasswordBoxHelper.CapsLockWarningToolTip="大写锁定已打开" Controls:TextBoxHelper.IsWaitingForData="True" Margin="82,103,259,111" Opacity="0.7"/>
+        <TextBlock x:Name="textyxmz" TextWrapping="Wrap" Text="账号" Margin="38,66,402,158" Foreground="White" >
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                    Color="Black"  
+                    Opacity="1"  
+                    BlurRadius="20"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <TextBlock x:Name="textyxmz_Copy" TextWrapping="Wrap" Text="密码" Margin="38,108,402,116" Foreground="White" >
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                    Color="Black"  
+                    Opacity="1"  
+                    BlurRadius="20"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <TextBlock x:Name="textyxmz_Copy1" TextWrapping="Wrap" Text="重复密码" Margin="27,151,394,73" Foreground="White" >
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                    Color="Black"  
+                    Opacity="1"  
+                    BlurRadius="20"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <PasswordBox x:Name="passbox_2" Controls:PasswordBoxHelper.CapsLockWarningToolTip="大写锁定已打开" Controls:TextBoxHelper.IsWaitingForData="True" Margin="82,146,259,68" Opacity="0.7"/>
+        <TextBox x:Name="textBox_name" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" Margin="82,60,0,0" Opacity="0.7"/>
+        <TextBox x:Name="textBox_code" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" Margin="306,146,0,0" Opacity="0.7"/>
+        <TextBlock x:Name="textyxmz_Copy2" TextWrapping="Wrap" Text="验证码" Margin="257,151,170,73" Foreground="White" >
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="0"  
+                    Color="Black"  
+                    Opacity="1"  
+                    BlurRadius="20"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <Button x:Name="code" Content="" HorizontalAlignment="Left" Height="69" Margin="306,60,0,0" VerticalAlignment="Top" Width="130" Foreground="{x:Null}" BorderBrush="#FFEEEAEA" Click="Code_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="bg.jpg"/>
+            </Button.Background>
+        </Button>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="60" Margin="306,0,0,0" VerticalAlignment="Top" Width="130"/>
+
+    </Grid>
+</Controls:MetroWindow>

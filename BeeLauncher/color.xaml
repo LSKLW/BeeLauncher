@@ -1,0 +1,178 @@
+﻿<Controls:MetroWindow x:Class="BeeLauncher.AccentStyleWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:Converters="http://metro.mahapps.com/winfx/xaml/shared"
+                      RenderOptions.ClearTypeHint="Enabled"
+                      TextOptions.TextFormattingMode="Display"
+                      Title="更改主题及颜色"
+                      SizeToContent="WidthAndHeight"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      ResizeMode="NoResize">
+
+    <Controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Controls:MetroWindow.Resources>
+
+    <Controls:MetroWindow.TitleTemplate>
+        <DataTemplate>
+            <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content, Converter={Converters:ToUpperConverter}}"
+                       TextTrimming="CharacterEllipsis"
+                       VerticalAlignment="Center"
+                       Margin="8 -1 0 0"
+                       FontSize="{DynamicResource WindowTitleFontSize}"
+                       FontFamily="{DynamicResource DefaultFont}" />
+        </DataTemplate>
+    </Controls:MetroWindow.TitleTemplate>
+
+    <Grid>
+
+        <Grid.Resources>
+            <Style TargetType="Button"
+                   BasedOn="{StaticResource MetroButton}">
+                <Setter Property="Height"
+                        Value="23" />
+                <Setter Property="Margin"
+                        Value="2" />
+            </Style>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0"
+                  Margin="5"
+                  Header="更改主题">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <UniformGrid Grid.Row="0"
+                             Columns="5">
+                    <Button Content="Light"
+                            Click="ChangeAppThemeButtonClick" Margin="1,2,-86,2" />
+                    <Button Content="Dark"
+                            Click="ChangeAppThemeButtonClick" Margin="110,2,-195,2" />
+                </UniformGrid>
+
+                <UniformGrid Grid.Row="1"
+                             Columns="5"/>
+
+                <UniformGrid Grid.Row="2" Margin="5" Columns="2"/>
+                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="默认(亮)" Margin="56,27,228,-4" Grid.RowSpan="3"/>
+                <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="暗" Margin="246,28,69,-5" Grid.RowSpan="3"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1"
+                  Margin="5"
+                  Header="更改颜色">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <UniformGrid Grid.Row="0"
+                             Columns="5">
+                    <Button Content="Blue"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Red"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Green"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Purple"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Orange"
+                            Click="ChangeAppAccentButtonClick" />
+
+                </UniformGrid>
+
+                <UniformGrid Grid.Row="1" Margin="5" Columns="5"/>
+                <TextBlock x:Name="textBlock_Copy1" TextWrapping="Wrap" Text="默认(蓝)" Margin="11,28,272,30" Grid.RowSpan="3"/>
+                <TextBlock x:Name="textBlock_Copy2" TextWrapping="Wrap" Text="红" Margin="92,28,223,33" Grid.RowSpan="3"/>
+                <TextBlock x:Name="textBlock_Copy3" TextWrapping="Wrap" Text="绿" Margin="157,28,158,33" Grid.RowSpan="3"/>
+                <TextBlock x:Name="textBlock_Copy4" TextWrapping="Wrap" Text="紫" Margin="222,28,92,33" Grid.RowSpan="3"/>
+                <TextBlock x:Name="textBlock_Copy5" TextWrapping="Wrap" Text="橙" Margin="289,28,25,33" Grid.RowSpan="3"/>
+                <UniformGrid Grid.Row="2"  Columns="5">
+                    <Button Content="Lime"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Emerald"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Teal"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Cyan"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Cobalt"
+                            Click="ChangeAppAccentButtonClick" />
+                </UniformGrid>
+                <UniformGrid Grid.Row="3" Columns="5">
+                    <Button Content="Indigo"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Violet"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Pink"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Magenta"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Crimson"
+                            Click="ChangeAppAccentButtonClick" />
+                </UniformGrid>
+                <UniformGrid Grid.Row="4"  Columns="5">
+                    <Button Content="Amber"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Yellow"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Brown"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Olive"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Steel"
+                            Click="ChangeAppAccentButtonClick" />
+                </UniformGrid>
+                <UniformGrid Grid.Row="5" Columns="5">
+                    <Button Content="Mauve"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Taupe"
+                            Click="ChangeAppAccentButtonClick" />
+                    <Button Content="Sienna"
+                            Click="ChangeAppAccentButtonClick" />
+                </UniformGrid>
+                <TextBlock x:Name="textBlock_Copy6" TextWrapping="Wrap" Text="青柠" Margin="19,31,283,33" Grid.Row="2" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy7" TextWrapping="Wrap" Text="翠绿" Margin="86,31,215,32" Grid.Row="2" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy8" TextWrapping="Wrap" Text="蓝绿" Margin="151,31,150,31" Grid.Row="2" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy9" TextWrapping="Wrap" Text="青绿" Margin="216,31,86,33" Grid.Row="2" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy10" TextWrapping="Wrap" Text="钴蓝" Margin="284,31,18,33" Grid.Row="2" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy11" TextWrapping="Wrap" Text="靛蓝" Margin="19,35,284,32" Grid.Row="3" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy12" TextWrapping="Wrap" Text="紫罗兰" Margin="79,35,212,32" Grid.Row="3" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy13" TextWrapping="Wrap" Text="粉" Margin="157,35,158,32" Grid.Row="3" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy14" TextWrapping="Wrap" Text="品红" Margin="217,35,86,30" Grid.Row="3" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy15" TextWrapping="Wrap" Text="深红" Margin="284,35,18,25" Grid.Row="3" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy16" TextWrapping="Wrap" Text="琥珀" Margin="20,33,283,21" Grid.Row="4" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy17" TextWrapping="Wrap" Text="黄" Margin="91,33,224,27" Grid.Row="4" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy18" TextWrapping="Wrap" Text="褐" Margin="156,34,157,25" Grid.Row="4" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy19" TextWrapping="Wrap" Text="橄榄" Margin="218,34,84,22" Grid.Row="4" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy20" TextWrapping="Wrap" Text="钢色" Margin="284,32,18,21" Grid.Row="4" Grid.RowSpan="2"/>
+                <TextBlock x:Name="textBlock_Copy21" TextWrapping="Wrap" Text="淡紫" Margin="20,30,284,-8" Grid.Row="5"/>
+                <TextBlock x:Name="textBlock_Copy22" TextWrapping="Wrap" Text="灰褐" Margin="85,29,219,-15" Grid.Row="5"/>
+                <TextBlock x:Name="textBlock_Copy23" TextWrapping="Wrap" Text="赭色" Margin="151,0,153,-10" Grid.Row="5" Height="19" VerticalAlignment="Bottom"/>
+
+
+            </Grid>
+        </GroupBox>
+    </Grid>
+
+</Controls:MetroWindow>
